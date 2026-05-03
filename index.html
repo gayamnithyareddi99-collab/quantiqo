@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiqo | UK's First Post-Quantum Settlement & Agentic Governance Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+:root{
+  /* Quantiqo Brand  Deep Navy + Electric Cyan + Quantum Blue */
+  --cyan:#00D4FF;
+  --cyan-light:#33DDFF;
+  --cyan-dim:#00AACF;
+  --cyan-dark:#007A99;
+
+  /* Dark Backgrounds */
+  --bg-black:#020810;
+  --bg-deep:#030C1A;
+  --bg-dark:#050F20;
+  --bg-card:#080E1E;
+
+  /* Navy Accents */
+  --navy:#060D1E;
+  --navy-mid:#0A1530;
+  --navy-light:#0E1F42;
+  --navy-bright:#1535A0;
+  --blue-accent:#1535A0;
+  --blue-soft:#4B7EE8;
+  --blue-glow:rgba(0,212,255,0.12);
+
+  /* Light Sections */
+  --light-bg:#EEF4FB;
+  --light-card:#FFFFFF;
+  --light-border:#C2D8EE;
+  --text-dark:#030B1C;
+  --text-mid:#12274A;
+  --text-muted:#3A5470;
+
+  /* Text on Dark */
+  --white:#FFFFFF;
+  --txt-secondary:#7AB0CC;
+  --txt-dim:#2E4A66;
+
+  /* UI */
+  --card-bg:rgba(8,14,30,0.95);
+  --card-border:rgba(0,212,255,0.14);
+  --navy-card:rgba(6,13,30,0.85);
+  --navy-border:rgba(21,53,160,0.3);
+
+  --nav-h:72px;
+  --max-w:1200px;
+  --font:'Plus Jakarta Sans',sans-serif;
+  --display:'Sora',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+  --ease:cubic-bezier(0.4,0,0.2,1);
+  --ease-out:cubic-bezier(0,0,0.2,1);
+}
+
+body{font-family:var(--font);color:var(--white);background:var(--bg-black);overflow-x:hidden;}
+
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--bg-black);}
+::-webkit-scrollbar-thumb{background:var(--cyan);border-radius:2px;}
+
+img{display:block;max-width:100%;}
+
+/* ─── NAVBAR ─────────────────────────────────────────── */
+.navbar{
+  position:fixed;top:0;left:0;width:100%;height:var(--nav-h);
+  background:rgba(2,8,16,0.97);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(0,212,255,0.1);
+  z-index:1000;display:flex;align-items:center;
+  padding:0 clamp(16px,5vw,60px);
+  justify-content:space-between;
+  transition:border-color 0.3s;
+}
+.nav-logo{
+  font-family:var(--display);font-size:22px;font-weight:800;
+  color:var(--cyan);letter-spacing:-0.3px;
+  display:flex;align-items:center;gap:12px;
+  cursor:pointer;text-decoration:none;flex-shrink:0;
+}
+.nav-logo-icon{
+  width:40px;height:40px;
+  background:linear-gradient(135deg,var(--cyan) 0%,var(--cyan-dark) 100%);
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  box-shadow:0 4px 14px rgba(0,212,255,0.28);
+}
+.nav-logo-icon svg{width:22px;height:22px;}
+.nav-logo-text{display:flex;flex-direction:column;line-height:1;}
+.nav-logo-text span{font-size:10px;font-family:var(--mono);font-weight:500;color:var(--txt-secondary);letter-spacing:2px;text-transform:uppercase;margin-top:3px;}
+
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none;}
+.nav-links li button{
+  background:none;border:none;
+  color:var(--txt-secondary);
+  font-size:11px;font-weight:600;
+  padding:8px 16px;border-radius:7px;
+  transition:all 0.22s var(--ease);
+  cursor:pointer;font-family:var(--mono);
+  letter-spacing:0.8px;text-transform:uppercase;
+  position:relative;white-space:nowrap;
+}
+.nav-links li button:hover{color:var(--cyan);background:rgba(0,212,255,0.06);}
+.nav-links li button.active{color:var(--cyan);background:rgba(0,212,255,0.08);}
+.nav-links li button.active::after{
+  content:'';position:absolute;bottom:5px;left:50%;
+  transform:translateX(-50%);width:14px;height:2px;
+  background:var(--cyan);border-radius:2px;
+}
+
+.nav-right{display:flex;align-items:center;gap:10px;}
+.btn-demo-nav{
+  background:linear-gradient(135deg,var(--cyan),var(--cyan-dark));
+  color:var(--bg-black);border:none;padding:9px 20px;border-radius:8px;
+  font-size:11px;font-weight:700;cursor:pointer;
+  transition:all 0.22s;font-family:var(--mono);
+  letter-spacing:0.8px;text-transform:uppercase;white-space:nowrap;
+  box-shadow:0 2px 10px rgba(0,212,255,0.2);
+}
+.btn-demo-nav:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,212,255,0.4);}
+
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none;flex-shrink:0;}
+.hamburger span{width:22px;height:2px;background:var(--cyan);border-radius:2px;transition:0.3s;display:block;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+.mobile-nav{
+  display:none;position:fixed;top:var(--nav-h);left:0;width:100%;
+  background:rgba(2,8,16,0.99);backdrop-filter:blur(20px);
+  padding:12px 20px 20px;flex-direction:column;gap:2px;
+  z-index:999;border-bottom:1px solid rgba(0,212,255,0.1);
+  animation:slideDown 0.25s var(--ease-out);
+}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:translateY(0);}}
+.mobile-nav.open{display:flex;}
+.mobile-nav button{
+  background:none;border:none;color:var(--txt-secondary);
+  font-size:13px;font-weight:600;padding:13px 12px;
+  border-bottom:1px solid rgba(0,212,255,0.06);
+  cursor:pointer;font-family:var(--mono);text-align:left;
+  text-transform:uppercase;letter-spacing:1px;
+  transition:color 0.2s,background 0.2s;border-radius:6px;
+}
+.mobile-nav button:hover{color:var(--cyan);background:rgba(0,212,255,0.05);}
+.mobile-nav .mob-cta{
+  margin-top:8px;background:linear-gradient(135deg,var(--cyan),var(--cyan-dark));
+  color:var(--bg-black);border:none;padding:13px;
+  border-radius:8px;font-weight:700;font-size:12px;
+  letter-spacing:1px;text-transform:uppercase;cursor:pointer;
+  font-family:var(--mono);
+}
+
+/* ─── PAGE SYSTEM ─────────────────────────────────────── */
+.page{display:none;min-height:100vh;padding-top:var(--nav-h);}
+.page.active{display:block;animation:pgIn 0.35s var(--ease);}
+@keyframes pgIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+/* ─── SECTION COMMONS ─────────────────────────────────── */
+.label-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:10px;font-weight:600;
+  letter-spacing:3px;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:14px;
+}
+.label-tag::before{content:'';width:20px;height:1px;background:var(--cyan);}
+
+.label-tag-blue{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:10px;font-weight:600;
+  letter-spacing:3px;text-transform:uppercase;
+  color:var(--blue-soft);margin-bottom:14px;
+}
+.label-tag-blue::before{content:'';width:20px;height:1px;background:var(--blue-soft);}
+
+.section-h2{
+  font-family:var(--display);font-size:clamp(28px,3.5vw,52px);
+  font-weight:800;line-height:1.1;letter-spacing:-0.8px;
+  margin-bottom:10px;
+}
+.section-h2.green{color:var(--cyan);}
+.section-h2.dark{color:var(--text-dark);}
+.section-h2.white{color:var(--white);}
+.section-h2.navy-txt{color:var(--navy-light);}
+
+.section-divider{width:56px;height:3px;margin:16px 0 28px;border-radius:2px;}
+.divider-green{background:linear-gradient(90deg,var(--cyan),transparent);}
+.divider-blue{background:linear-gradient(90deg,var(--blue-accent),transparent);}
+.divider-center{margin:16px auto 28px;}
+
+.para-dark{color:var(--txt-secondary);line-height:1.85;font-size:17px;}
+.para-light{color:var(--text-mid);line-height:1.85;font-size:17px;}
+
+.container{max-width:var(--max-w);margin:0 auto;padding:0 clamp(16px,4vw,60px);}
+
+/* ─── BUTTONS ─────────────────────────────────────────── */
+.btn-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,var(--cyan),var(--cyan-dark));
+  color:var(--bg-black);padding:13px 28px;border-radius:8px;
+  text-decoration:none;font-weight:700;font-size:12px;
+  letter-spacing:0.8px;text-transform:uppercase;
+  transition:all 0.25s;font-family:var(--mono);border:none;cursor:pointer;
+  box-shadow:0 4px 16px rgba(0,212,255,0.22);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,212,255,0.38);}
+
+.btn-secondary{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1.5px solid rgba(0,212,255,0.4);color:var(--cyan);
+  padding:12px 28px;border-radius:8px;text-decoration:none;
+  font-weight:700;font-size:12px;letter-spacing:0.8px;
+  text-transform:uppercase;transition:all 0.25s;
+  font-family:var(--mono);background:none;cursor:pointer;
+}
+.btn-secondary:hover{background:rgba(0,212,255,0.07);border-color:var(--cyan);}
+
+.btn-blue{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--blue-accent);color:var(--white);
+  padding:12px 28px;border-radius:8px;
+  font-weight:700;font-size:12px;letter-spacing:0.8px;
+  text-transform:uppercase;transition:all 0.25s;
+  font-family:var(--mono);border:none;cursor:pointer;
+  box-shadow:0 4px 16px rgba(21,53,160,0.3);
+}
+.btn-blue:hover{transform:translateY(-2px);background:#1140C0;box-shadow:0 8px 28px rgba(21,53,160,0.45);}
+
+/* ─── STATUS INDICATORS ─────────────────────────────── */
+.risk-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 10px;border-radius:20px;
+  font-size:10px;font-weight:700;font-family:var(--mono);letter-spacing:0.5px;
+}
+.risk-green{background:rgba(0,212,255,0.1);color:var(--cyan);border:1px solid rgba(0,212,255,0.3);}
+.risk-amber{background:rgba(255,186,0,0.12);color:#F5A623;border:1px solid rgba(255,186,0,0.25);}
+.risk-red{background:rgba(239,68,68,0.12);color:#EF4444;border:1px solid rgba(239,68,68,0.25);}
+.risk-blue{background:rgba(75,126,232,0.12);color:var(--blue-soft);border:1px solid rgba(75,126,232,0.25);}
+.risk-dot{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0;}
+
+/* ─── HERO ──────────────────────────────────────────────── */
+.hero{
+  position:relative;
+  padding:clamp(80px,12vw,120px) 0 clamp(60px,8vw,90px);
+  background:var(--bg-black);overflow:hidden;
+  min-height:calc(100vh - var(--nav-h));
+  display:flex;align-items:center;
+}
+.hero-noise{
+  position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;
+}
+.hero-grid-bg{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(0,212,255,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,212,255,0.04) 1px,transparent 1px);
+  background-size:50px 50px;
+  pointer-events:none;z-index:0;
+}
+.hero-glow-1{
+  position:absolute;top:-200px;right:-100px;
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(0,212,255,0.07) 0%,transparent 65%);
+  pointer-events:none;z-index:0;
+}
+.hero-glow-2{
+  position:absolute;bottom:-150px;left:-100px;
+  width:500px;height:500px;
+  background:radial-gradient(circle,rgba(21,53,160,0.09) 0%,transparent 65%);
+  pointer-events:none;z-index:0;
+}
+.hero-inner{
+  max-width:var(--max-w);margin:0 auto;
+  padding:0 clamp(16px,4vw,60px);
+  display:grid;grid-template-columns:1.15fr 0.85fr;
+  gap:clamp(30px,5vw,80px);align-items:center;
+  position:relative;z-index:1;width:100%;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:9px;
+  background:rgba(0,212,255,0.07);
+  border:1px solid rgba(0,212,255,0.25);
+  color:var(--cyan);font-size:10px;font-weight:700;
+  letter-spacing:2.5px;padding:6px 14px 6px 10px;
+  border-radius:4px;text-transform:uppercase;
+  margin-bottom:20px;font-family:var(--mono);
+}
+.hero-badge-dot{
+  width:7px;height:7px;border-radius:50%;background:var(--cyan);
+  animation:pulse-dot 1.6s ease-in-out infinite;flex-shrink:0;
+}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.35;transform:scale(0.55);}}
+
+.hero h1{
+  font-family:var(--display);
+  font-size:clamp(38px,4.5vw,68px);
+  line-height:1.06;font-weight:800;
+  letter-spacing:-1.5px;color:var(--white);
+  margin-bottom:10px;
+}
+.hero h1 .green{color:var(--cyan);}
+.hero h1 .blue{color:var(--blue-soft);}
+
+.hero-rule{
+  width:64px;height:3px;
+  background:linear-gradient(90deg,var(--cyan),rgba(21,53,160,0.6));
+  margin:20px 0 24px;border-radius:2px;
+}
+.hero-body{
+  color:var(--txt-secondary);font-size:clamp(14px,1.5vw,19px);
+  line-height:1.8;margin-bottom:36px;max-width:540px;
+}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+
+/* Score Card */
+.score-card{
+  background:linear-gradient(145deg,rgba(8,14,30,0.98),rgba(3,12,26,0.99));
+  border:1px solid rgba(0,212,255,0.18);border-radius:18px;
+  padding:32px;position:relative;overflow:hidden;
+  box-shadow:0 24px 70px rgba(0,0,0,0.6),0 0 0 1px rgba(0,212,255,0.05);
+}
+.score-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--cyan),var(--blue-accent),transparent);
+}
+.score-card-label{
+  font-family:var(--mono);color:var(--cyan);
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;margin-bottom:20px;
+  display:flex;align-items:center;gap:8px;
+}
+.score-card-label::after{content:'';flex:1;height:1px;background:rgba(0,212,255,0.15);}
+.score-row{
+  display:flex;align-items:center;gap:12px;
+  padding:11px 0;border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.score-row:last-child{border-bottom:none;padding-bottom:0;}
+.score-icon{
+  width:30px;height:30px;border-radius:7px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-size:14px;
+}
+.score-icon.green-bg{background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.2);}
+.score-icon.blue-bg{background:rgba(21,53,160,0.12);border:1px solid rgba(21,53,160,0.25);}
+.score-icon.amber-bg{background:rgba(245,166,35,0.1);border:1px solid rgba(245,166,35,0.2);}
+.score-lbl{color:var(--txt-secondary);font-size:13px;flex:1;font-weight:500;}
+.score-val{
+  font-family:var(--display);color:var(--white);
+  font-size:17px;font-weight:700;
+  display:flex;align-items:center;gap:8px;
+}
+.score-big{
+  margin-top:20px;padding-top:20px;
+  border-top:1px solid rgba(0,212,255,0.1);
+  display:flex;align-items:center;gap:18px;
+}
+.score-big-num{
+  font-family:var(--display);font-size:48px;font-weight:800;
+  color:var(--cyan);line-height:1;letter-spacing:-2px;
+}
+.score-big-info .label{color:var(--white);font-weight:700;font-size:15px;margin-bottom:6px;}
+.score-big-info .sub{display:flex;gap:6px;flex-wrap:wrap;}
+
+/* ─── STATS STRIP ─────────────────────────────────────── */
+.stats-strip{
+  background:linear-gradient(135deg,rgba(6,13,30,0.95),rgba(8,14,30,0.97));
+  border-top:1px solid rgba(0,212,255,0.08);
+  border-bottom:1px solid rgba(0,212,255,0.08);
+  padding:clamp(32px,5vw,52px) 0;
+}
+.stats-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:clamp(20px,3vw,48px);
+}
+.stat-blk{border-left:2px solid rgba(0,212,255,0.18);padding-left:20px;}
+.stat-blk:first-child{border-left:none;padding-left:0;}
+.stat-num{
+  display:block;font-family:var(--display);
+  font-size:clamp(28px,3.5vw,42px);font-weight:800;
+  color:var(--cyan);letter-spacing:-1px;line-height:1;
+  margin-bottom:8px;
+}
+.stat-txt{color:var(--txt-secondary);font-size:13px;line-height:1.55;margin-bottom:6px;}
+.stat-source{font-family:var(--mono);font-size:9px;color:var(--txt-dim);letter-spacing:1px;text-transform:uppercase;}
+
+/* ─── SECTION LIGHT (How It Works) ──────────────────────── */
+.section-light{
+  background:var(--light-bg);
+  padding:clamp(60px,8vw,100px) 0;
+}
+.process-intro{
+  max-width:680px;margin:0 auto 48px;text-align:center;
+}
+.process-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:clamp(16px,2.5vw,28px);
+}
+.process-card{
+  background:var(--light-card);border-radius:14px;
+  overflow:hidden;border:1px solid var(--light-border);
+  transition:transform 0.25s var(--ease),box-shadow 0.25s;
+}
+.process-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(6,13,30,0.14);}
+.process-card-img{
+  width:100%;height:160px;object-fit:cover;
+  background:linear-gradient(135deg,rgba(6,13,30,0.08),rgba(0,212,255,0.06));
+  display:flex;align-items:center;justify-content:center;
+  font-size:56px;
+}
+.process-card-body{padding:20px;}
+.step-tag{
+  font-family:var(--mono);font-size:9px;font-weight:700;
+  color:var(--blue-accent);letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:8px;
+}
+.process-card h3{font-family:var(--display);color:var(--text-dark);font-size:17px;font-weight:700;margin-bottom:10px;}
+.process-card p{color:var(--text-muted);font-size:13.5px;line-height:1.65;}
+
+/* ─── SECTION DARK (Core Capabilities) ──────────────────── */
+.section-dark{
+  background:var(--bg-dark);
+  padding:clamp(60px,8vw,100px) 0;
+}
+.platform-sub{max-width:720px;margin-bottom:48px;}
+.platform-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:clamp(16px,2.5vw,28px);
+}
+.platform-card{
+  background:var(--card-bg);border:1px solid rgba(0,212,255,0.1);
+  border-radius:16px;overflow:hidden;
+  transition:transform 0.25s var(--ease),border-color 0.25s,box-shadow 0.25s;
+}
+.platform-card:hover{transform:translateY(-4px);border-color:rgba(0,212,255,0.26);box-shadow:0 20px 60px rgba(0,0,0,0.35);}
+.platform-card-img{
+  width:100%;height:170px;object-fit:cover;
+  background:linear-gradient(135deg,rgba(6,13,30,0.6),rgba(0,212,255,0.07));
+  display:flex;align-items:center;justify-content:center;
+  font-size:64px;position:relative;overflow:hidden;
+}
+.platform-card-img::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 50%,var(--bg-card) 100%);
+}
+.platform-card .inner{padding:22px 24px 24px;}
+.element-badge{
+  font-family:var(--mono);font-size:9px;font-weight:700;
+  color:var(--cyan);letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:10px;padding:3px 8px;
+  background:rgba(0,212,255,0.07);border:1px solid rgba(0,212,255,0.18);
+  border-radius:4px;display:inline-block;
+}
+.platform-card h3{font-family:var(--display);color:var(--white);font-size:18px;font-weight:700;margin-bottom:10px;}
+.platform-card p{color:var(--txt-secondary);font-size:14px;line-height:1.7;}
+.more-text{
+  color:var(--txt-dim);font-size:13px;line-height:1.65;
+  margin-top:14px;max-height:0;overflow:hidden;
+  transition:max-height 0.4s var(--ease);
+}
+.platform-card.open .more-text{max-height:300px;}
+.expand-btn{
+  margin-top:16px;background:none;border:1px solid rgba(0,212,255,0.22);
+  color:var(--cyan);padding:7px 16px;border-radius:6px;
+  font-size:11px;font-weight:600;cursor:pointer;
+  font-family:var(--mono);letter-spacing:0.5px;
+  transition:all 0.2s;
+}
+.expand-btn:hover{background:rgba(0,212,255,0.07);}
+
+/* ─── ABOUT PAGE ────────────────────────────────────────── */
+.about-hero{
+  padding:clamp(80px,12vw,120px) 0 clamp(60px,8vw,100px);
+  background:var(--bg-black);
+}
+.about-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(40px,6vw,80px);align-items:start;
+}
+.about-para{
+  color:var(--txt-secondary);font-size:16px;line-height:1.8;margin-bottom:18px;
+}
+.about-tags{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:10px;
+  margin-top:28px;
+}
+.feature-tag{
+  background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.18);
+  color:var(--cyan);font-size:12px;font-weight:600;
+  padding:9px 14px;border-radius:7px;font-family:var(--mono);
+  letter-spacing:0.3px;
+}
+.founder-card{
+  background:var(--card-bg);border:1px solid rgba(0,212,255,0.13);
+  border-radius:16px;padding:28px;margin-bottom:20px;
+  position:relative;overflow:hidden;
+}
+.founder-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--cyan),transparent);
+}
+.founder-tag{
+  font-family:var(--mono);font-size:9px;letter-spacing:2.5px;
+  text-transform:uppercase;color:var(--cyan);margin-bottom:10px;
+}
+.founder-card h4{font-family:var(--display);color:var(--white);font-size:20px;font-weight:700;margin-bottom:4px;}
+.founder-title{color:var(--txt-secondary);font-size:13px;margin-bottom:14px;font-weight:500;}
+.founder-card p{color:var(--txt-dim);font-size:14px;line-height:1.7;margin-bottom:12px;}
+.founder-card p:last-child{margin-bottom:0;}
+
+/* ─── PLATFORM PAGE ─────────────────────────────────────── */
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,2vw,20px);margin-bottom:40px;}
+.kpi-card{
+  background:var(--card-bg);border:1px solid rgba(0,212,255,0.1);
+  border-radius:12px;padding:20px 18px;text-align:center;
+  transition:border-color 0.25s;
+}
+.kpi-card:hover{border-color:rgba(0,212,255,0.26);}
+.kpi-num{font-family:var(--display);font-size:clamp(26px,3vw,38px);font-weight:800;color:var(--cyan);letter-spacing:-1px;margin-bottom:6px;}
+.kpi-lbl{color:var(--txt-secondary);font-size:12px;font-family:var(--mono);letter-spacing:0.5px;}
+
+/* ─── MARKET PAGE ────────────────────────────────────────── */
+.market-kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.5vw,28px);margin-bottom:40px;}
+.mkt-card{background:var(--card-bg);border:1px solid rgba(0,212,255,0.1);border-radius:14px;padding:24px;transition:border-color 0.25s;}
+.mkt-card:hover{border-color:rgba(0,212,255,0.26);}
+.mkt-num{font-family:var(--display);font-size:clamp(28px,3.5vw,42px);font-weight:800;color:var(--cyan);letter-spacing:-1px;margin-bottom:10px;}
+.mkt-lbl{color:var(--txt-secondary);font-size:14px;line-height:1.6;margin-bottom:10px;}
+.mkt-source{font-family:var(--mono);font-size:9px;color:var(--txt-dim);letter-spacing:1px;text-transform:uppercase;}
+
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.5vw,28px);margin-bottom:28px;}
+.chart-card{background:var(--card-bg);border:1px solid rgba(0,212,255,0.1);border-radius:14px;padding:24px;}
+.chart-card-full{background:var(--card-bg);border:1px solid rgba(0,212,255,0.1);border-radius:14px;padding:24px;margin-bottom:28px;}
+.chart-title{font-family:var(--display);color:var(--white);font-size:16px;font-weight:700;margin-bottom:4px;}
+.chart-sub{color:var(--txt-secondary);font-size:12px;margin-bottom:16px;font-family:var(--mono);}
+.chart-wrap{height:240px;position:relative;}
+.chart-wrap-lg{height:340px;position:relative;}
+
+/* ─── PRICING PAGE ───────────────────────────────────────── */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.5vw,28px);margin-bottom:60px;}
+.price-card{
+  background:var(--card-bg);border:1px solid rgba(0,212,255,0.1);
+  border-radius:18px;padding:32px;position:relative;overflow:hidden;
+  transition:transform 0.25s,border-color 0.25s,box-shadow 0.25s;
+}
+.price-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.35);}
+.price-card.featured{
+  border-color:rgba(0,212,255,0.3);
+  background:linear-gradient(160deg,rgba(8,14,30,0.98),rgba(0,212,255,0.04));
+}
+.price-card.featured::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--cyan),var(--blue-accent));
+}
+.price-tier{font-family:var(--mono);font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--cyan);margin-bottom:10px;}
+.price-card h3{font-family:var(--display);color:var(--white);font-size:22px;font-weight:800;margin-bottom:12px;}
+.price-card .desc{color:var(--txt-secondary);font-size:13.5px;line-height:1.65;margin-bottom:20px;}
+.price-amount{font-family:var(--display);font-size:48px;font-weight:800;color:var(--cyan);letter-spacing:-2px;}
+.price-period{font-family:var(--mono);font-size:9px;color:var(--txt-dim);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px;}
+.price-divider{height:1px;background:rgba(0,212,255,0.08);margin-bottom:20px;}
+.price-features{list-style:none;margin-bottom:28px;}
+.price-features li{color:var(--txt-secondary);font-size:13.5px;padding:6px 0;display:flex;gap:10px;align-items:flex-start;border-bottom:1px solid rgba(255,255,255,0.03);}
+.price-features li:last-child{border-bottom:none;}
+.chk{color:var(--cyan);font-weight:700;font-size:13px;flex-shrink:0;margin-top:1px;}
+.price-btn{
+  width:100%;padding:13px;border-radius:8px;
+  font-family:var(--mono);font-size:12px;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;cursor:pointer;
+  transition:all 0.25s;border:none;
+}
+.price-btn-outline{background:none;border:1.5px solid rgba(0,212,255,0.3);color:var(--cyan);}
+.price-btn-outline:hover{background:rgba(0,212,255,0.07);}
+.price-btn-green{background:linear-gradient(135deg,var(--cyan),var(--cyan-dark));color:var(--bg-black);}
+.price-btn-green:hover{box-shadow:0 8px 28px rgba(0,212,255,0.4);transform:translateY(-1px);}
+
+/* ─── FAQ ─────────────────────────────────────────────── */
+.faq-wrap{max-width:800px;}
+.faq-item{
+  border-bottom:1px solid rgba(0,212,255,0.08);
+  padding:0;margin-bottom:0;
+}
+.faq-q{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:20px 0;cursor:pointer;
+}
+.faq-q h4{font-family:var(--display);color:var(--white);font-size:16px;font-weight:600;line-height:1.4;}
+.faq-icon{
+  color:var(--cyan);font-size:22px;font-weight:300;
+  flex-shrink:0;transition:transform 0.25s;
+}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+.faq-body{
+  color:var(--txt-secondary);font-size:14.5px;line-height:1.75;
+  max-height:0;overflow:hidden;
+  transition:max-height 0.35s var(--ease),padding 0.35s;
+}
+.faq-item.open .faq-body{max-height:300px;padding-top:14px;}
+
+/* ─── CONTACT ────────────────────────────────────────────── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:start;}
+.contact-left-para{color:var(--txt-secondary);font-size:15px;line-height:1.75;margin-bottom:16px;}
+.contact-item{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px;}
+.contact-icon{
+  width:40px;height:40px;background:rgba(0,212,255,0.07);
+  border:1px solid rgba(0,212,255,0.18);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.contact-item-text strong{display:block;color:var(--white);font-size:13px;margin-bottom:2px;}
+.contact-item-text span{color:var(--txt-secondary);font-size:13px;}
+.contact-form-card{
+  background:var(--card-bg);border:1px solid rgba(0,212,255,0.13);
+  border-radius:16px;padding:36px;position:relative;overflow:hidden;
+}
+.contact-form-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--cyan),var(--blue-accent),transparent);
+}
+.contact-form-card h3{font-family:var(--display);color:var(--white);font-size:22px;font-weight:800;margin-bottom:24px;}
+.form-group{margin-bottom:18px;}
+.form-label{display:block;font-family:var(--mono);font-size:10px;font-weight:700;color:var(--txt-dim);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
+.form-ctrl{
+  width:100%;background:rgba(255,255,255,0.03);
+  border:1px solid rgba(0,212,255,0.18);border-radius:8px;
+  padding:12px 16px;color:var(--white);font-size:14px;
+  font-family:var(--font);transition:all 0.25s;outline:none;
+}
+.form-ctrl::placeholder{color:var(--txt-dim);}
+.form-ctrl:focus{border-color:rgba(0,212,255,0.5);background:rgba(0,212,255,0.03);}
+.form-ctrl option{background:var(--bg-card);}
+.ta{resize:vertical;min-height:90px;}
+.form-submit{
+  width:100%;background:linear-gradient(135deg,var(--cyan),var(--cyan-dark));
+  color:var(--bg-black);border:none;padding:14px;border-radius:8px;
+  font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:1px;
+  text-transform:uppercase;cursor:pointer;transition:all 0.25s;
+}
+.form-submit:hover{box-shadow:0 6px 20px rgba(0,212,255,0.35);transform:translateY(-1px);}
+#formSuccess{
+  display:none;margin-top:16px;background:rgba(0,212,255,0.08);
+  border:1px solid rgba(0,212,255,0.3);border-radius:8px;
+  padding:14px;color:var(--cyan);font-size:13px;text-align:center;
+  font-family:var(--mono);
+}
+
+/* ─── FOOTER ───────────────────────────────────────────── */
+footer{background:var(--bg-black);border-top:1px solid rgba(0,212,255,0.08);padding:clamp(40px,6vw,80px) 0 28px;}
+.footer-inner{max-width:var(--max-w);margin:0 auto;padding:0 clamp(16px,4vw,60px);}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:clamp(30px,5vw,80px);margin-bottom:40px;}
+.footer-logo{font-family:var(--display);color:var(--cyan);font-size:22px;font-weight:800;display:block;margin-bottom:14px;}
+.footer-brand p{color:var(--txt-dim);font-size:13px;line-height:1.75;}
+.footer-col h5{font-family:var(--mono);color:var(--white);font-size:10px;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:14px;}
+.footer-col a{display:block;color:var(--txt-dim);font-size:13px;margin-bottom:10px;cursor:pointer;transition:color 0.2s;}
+.footer-col a:hover{color:var(--cyan);}
+.footer-bottom{border-top:1px solid rgba(0,212,255,0.07);padding-top:20px;display:flex;flex-direction:column;gap:4px;}
+.footer-bottom p{color:var(--txt-dim);font-size:12px;font-family:var(--mono);}
+.footer-bottom span{color:var(--cyan);}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────── */
+@media(min-width:1400px){
+  :root{--max-w:1300px;}
+  .hero h1{font-size:72px;}
+  .hero-body{font-size:20px;max-width:580px;}
+  .section-h2{font-size:54px;}
+  .para-dark,.para-light{font-size:18px;}
+  .stat-num{font-size:46px;}
+  .process-card-img{height:180px;}
+  .platform-card-img{height:200px;}
+  .chart-wrap{height:300px;}
+  .chart-wrap-lg{height:420px;}
+  .score-big-num{font-size:52px;}
+}
+@media(max-width:900px){
+  .platform-grid{grid-template-columns:repeat(2,1fr);}
+  .pricing-grid{grid-template-columns:1fr 1fr;}
+  .kpi-row{grid-template-columns:repeat(2,1fr);}
+  .market-kpi{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  .nav-links,.nav-right .btn-demo-nav{display:none;}
+  .hamburger{display:flex;}
+  .nav-right{gap:0;}
+  .hero-inner{grid-template-columns:1fr;}
+  .hero-inner>div:last-child{display:none;}
+  .stats-grid{grid-template-columns:repeat(2,1fr);}
+  .process-grid{grid-template-columns:repeat(2,1fr);}
+  .platform-grid{grid-template-columns:1fr;}
+  .about-grid{grid-template-columns:1fr;}
+  .kpi-row{grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:28px;}
+  .kpi-card{padding:16px 12px;}
+  .charts-grid{grid-template-columns:1fr;gap:16px;margin-bottom:16px;}
+  .chart-card{padding:16px;}
+  .chart-card-full{padding:16px;margin-bottom:16px;}
+  .chart-wrap{height:200px;}
+  .chart-wrap-lg{height:260px;}
+  .pricing-grid{grid-template-columns:1fr;}
+  .contact-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;}
+  .market-kpi{grid-template-columns:1fr;}
+}
+@media(max-width:480px){
+  .stats-grid{grid-template-columns:repeat(2,1fr);}
+  .process-grid{grid-template-columns:1fr;}
+  .kpi-row{grid-template-columns:1fr;}
+  .about-tags{grid-template-columns:1fr;}
+  .chart-wrap{height:180px;}
+  .chart-wrap-lg{height:220px;}
+  .chart-title{font-size:14px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAVBAR ═══════════ -->
+<nav class="navbar">
+  <a class="nav-logo" href="#" onclick="showPage('home');return false;">
+    
+    <!-- ❌ Removed nav-logo-icon (SVG) -->
+
+    <div class="nav-logo-text">Quantiqo<span>Post-Quantum Settlement</span></div>
+  </a>
+
+  <ul class="nav-links">
+    <li><button id="nav-home" class="active" onclick="showPage('home')">Home</button></li>
+    <li><button id="nav-about" onclick="showPage('about')">About</button></li>
+    <li><button id="nav-platform" onclick="showPage('platform')">Platform</button></li>
+    <li><button id="nav-market" onclick="showPage('market')">Market</button></li>
+    <li><button id="nav-pricing" onclick="showPage('pricing')">Pricing</button></li>
+    <li><button id="nav-contact" onclick="showPage('contact')">Contact</button></li>
+  </ul>
+
+  <div class="nav-right">
+    <button class="btn-demo-nav" onclick="showPage('contact')">Book a Demo</button>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobileNav">
+  <button onclick="showPage('home');closeMobile()">Home</button>
+  <button onclick="showPage('about');closeMobile()">About</button>
+  <button onclick="showPage('platform');closeMobile()">Platform</button>
+  <button onclick="showPage('market');closeMobile()">Market</button>
+  <button onclick="showPage('pricing');closeMobile()">Pricing</button>
+  <button onclick="showPage('contact');closeMobile()">Contact</button>
+  <button class="mob-cta" onclick="showPage('contact');closeMobile()">Book a Demo →</button>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE: HOME
+═══════════════════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-noise"></div>
+    <div class="hero-grid-bg"></div>
+    <div class="hero-glow-1"></div>
+    <div class="hero-glow-2"></div>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          UK's First Post-Quantum Settlement &amp; Agentic Governance Platform
+        </div>
+        <h1>Settle. <span class="green">Verify.</span><br><span class="blue">Govern.</span></h1>
+        <div class="hero-rule"></div>
+        <p class="hero-body">Quantiqo transforms fragmented agentic labour into PQC-signed, billable settlements  enabling UK financial institutions, defence contractors, and enterprises to reconcile AI agent output in real time with sub-200ms latency, while meeting NCSC 2035 quantum-safe mandates.</p>
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="showPage('contact')">Book a Demo →</button>
+          <button class="btn-secondary" onclick="showPage('platform')">Explore Platform</button>
+        </div>
+      </div>
+      <div>
+        <div class="score-card">
+          <div class="score-card-label">Live PQC Settlement Monitor</div>
+          <div class="score-row">
+            <div class="score-icon green-bg">🔐</div>
+            <span class="score-lbl">PQC-ID Verification Score</span>
+            <span class="score-val">99.9%</span>
+          </div>
+          <div class="score-row">
+            <div class="score-icon blue-bg">⚡</div>
+            <span class="score-lbl">Micro-Settlement Latency</span>
+            <span class="score-val">&lt;200ms</span>
+          </div>
+          <div class="score-row">
+            <div class="score-icon amber-bg">⚠️</div>
+            <span class="score-lbl">HNDL Threat Flags Active</span>
+            <span class="score-val">2 <span class="risk-badge risk-amber"><span class="risk-dot"></span>Review</span></span>
+          </div>
+          <div class="score-row">
+            <div class="score-icon green-bg">🛡️</div>
+            <span class="score-lbl">NCSC 2035 Compliance</span>
+            <span class="score-val"><span class="risk-badge risk-green"><span class="risk-dot"></span>Phase 2 Ready</span></span>
+          </div>
+          <div class="score-row">
+            <div class="score-icon blue-bg">🤖</div>
+            <span class="score-lbl">Active AI Agents Audited</span>
+            <span class="score-val">5,000+</span>
+          </div>
+          <div class="score-big">
+            <div class="score-big-num">97</div>
+            <div class="score-big-info">
+              <div class="label">Quantum Posture Score</div>
+              <div class="sub"><span class="risk-badge risk-green"><span class="risk-dot"></span>RAID-Q Secured · Audit Ready</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS STRIP -->
+  <div class="stats-strip">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-blk">
+          <span class="stat-num">£294M</span>
+          <div class="stat-txt">UK annual addressable market<br>across fintech, defence &amp; PE sectors</div>
+          <span class="stat-source">Quantiqo Market Analysis 2026</span>
+        </div>
+        <div class="stat-blk">
+          <span class="stat-num">79%</span>
+          <div class="stat-txt">UK firms deploying AI agents<br>without a dedicated settlement rail</div>
+          <span class="stat-source">NCSC / Industry Survey 2025</span>
+        </div>
+        <div class="stat-blk">
+          <span class="stat-num">2035</span>
+          <div class="stat-txt">NCSC mandatory deadline for<br>full post-quantum migration</div>
+          <span class="stat-source">UK National Cyber Security Centre</span>
+        </div>
+        <div class="stat-blk">
+          <span class="stat-num">£499</span>
+          <div class="stat-txt">Entry SaaS price per month <br>full PQC settlement rail access</div>
+          <span class="stat-source">Quantiqo Basic Tier</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section class="section-light">
+    <div class="container">
+      <div class="process-intro">
+        <div class="label-tag-blue">How It Works</div>
+        <h2 class="section-h2 dark">From Agentic Output to Quantum-Safe Settlement in Milliseconds</h2>
+        <div class="section-divider divider-blue"></div>
+        <p class="para-light">Every Quantiqo deployment follows a proven four-stage agentic settlement journey  from PQC identity onboarding and task verification, to RAID-Q governance logging, micro-settlement execution, and quantum posture scoring  all without requiring cryptographic expertise from your finance or operations team.</p>
+      </div>
+      <div class="process-grid">
+        <div class="process-card">
+          <div class="process-card-img">
+            <img src="q1.jpg" alt="Onboard & Assign PQC Identity" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div class="process-card-body">
+            <div class="step-tag">STEP 01</div>
+            <h3>Onboard &amp; Assign PQC-ID</h3>
+            <p>Assign immutable, lattice-based cryptographic identities to every AI agent and human contributor. ML-DSA algorithms bind model version and intent to a verifiable legal trail  preventing Shadow AI from day one.</p>
+          </div>
+        </div>
+        <div class="process-card">
+          <div class="process-card-img">
+            <img src="q2.jpg" alt="Verify Task Completion" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div class="process-card-body">
+            <div class="step-tag">STEP 02</div>
+            <h3>Verify &amp; Settle</h3>
+            <p>Smart contracts trigger micro-payments the instant an AI agent provides mathematically verified proof-of-task. Output-based billing replaces opaque software subscriptions  CFOs gain granular ROI visibility.</p>
+          </div>
+        </div>
+        <div class="process-card">
+          <div class="process-card-img">
+            <img src="q3.jpg" alt="RAID-Q Governance Logging" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div class="process-card-body">
+            <div class="step-tag">STEP 03</div>
+            <h3>RAID-Q Governance</h3>
+            <p>Autonomous real-time RAID logs capture every project risk, assumption, and dependency at machine speed. Logs are wrapped in PQC encryption instantly  eliminating documentation drift across hybrid workforces.</p>
+          </div>
+        </div>
+        <div class="process-card">
+          <div class="process-card-img">
+            <img src="q4.jpg" alt="Quantum Posture Scoring" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div class="process-card-body">
+            <div class="step-tag">STEP 04</div>
+            <h3>Score &amp; Harden</h3>
+            <p>Generate a proprietary Quantum Posture Score for your entire supply chain. Identify cryptographic debt in legacy RSA/ECC systems, prioritise NCSC 2035 migration pathways, and prevent HNDL attacks proactively.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CORE CAPABILITIES -->
+  <section class="section-dark">
+    <div class="container">
+      <div class="label-tag">Core Capabilities</div>
+      <h2 class="section-h2 white">Five Engines. One Quantum-Safe Governance Layer.</h2>
+      <div class="section-divider divider-green"></div>
+      <p class="para-dark platform-sub">Quantiqo combines five proprietary engines into a single agentic settlement operating system  the only UK platform that unifies PQC-ID identity assignment, lattice-based micro-settlement, autonomous RAID-Q logging, quantum posture scoring, and Edge-First audit into one quantum-safe infrastructure for institutional clients.</p>
+      <div class="platform-grid">
+        <div class="platform-card">
+          <div class="platform-card-img">
+            <img src="q5.jpg" alt="PQC-ID Identity Engine" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+          </div>
+          <div class="inner">
+            <div class="element-badge">Engine 01</div>
+            <h3>PQC-ID Identity Engine</h3>
+            <p>Assigns immutable, lattice-based cryptographic identities to every AI agent. NIST ML-DSA algorithms bind model version, intent, and timestamp to a non-repudiable signature  the foundation of agentic accountability.</p>
+            <div class="more-text">Prevents Shadow AI through cryptographic binding of every autonomous action to a verified origin. Establishes a global standard for agentic non-repudiation that classical identity systems cannot provide. Each PQC-ID evolves with the agent's capability profile while maintaining provenance integrity.</div>
+            <button class="expand-btn" onclick="toggleCard(this)">Learn More ↓</button>
+          </div>
+        </div>
+        <div class="platform-card">
+          <div class="platform-card-img">
+            <img src="q6.jpg" alt="Lattice Micro-Settlement Engine" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+          </div>
+          <div class="inner">
+            <div class="element-badge">Engine 02</div>
+            <h3>Lattice Micro-Settlement Engine</h3>
+            <p>Smart contracts signed with lattice primitives trigger payments only upon mathematically verified proof-of-task. Achieves sub-200ms settlement latency  keeping pace with machine-speed agentic workforces.</p>
+            <div class="more-text">Replaces time-based billing with output-based performance settlement  eliminating the Accounting Gap in hybrid workforces. CFOs gain granular cost-per-output visibility for every AI agent interaction. Direct integration with Kafka stream processing for high-frequency financial environments.</div>
+            <button class="expand-btn" onclick="toggleCard(this)">Learn More ↓</button>
+          </div>
+        </div>
+        <div class="platform-card">
+          <div class="platform-card-img">
+            <img src="q7.jpg" alt="Quantum Posture Scoring" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+          </div>
+          <div class="inner">
+            <div class="element-badge">Engine 03</div>
+            <h3>Quantum Posture &amp; Crypto-Debt Scorer</h3>
+            <p>A proprietary diagnostic engine that scans supply chain environments for RSA/ECC vulnerabilities and quantifies Cryptographic Debt  the hidden migration cost of legacy encryption in hybrid workforces.</p>
+            <div class="more-text">Generates a Quantum Posture Score for every contributor in a hybrid team, enabling PE firms to price cryptographic risk into M&amp;A valuations. Prioritises NCSC 2035 Phase 2 migration pathways automatically. Essential for UK MoD supply chain contracts requiring quantum-safe audit certification.</div>
+            <button class="expand-btn" onclick="toggleCard(this)">Learn More ↓</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- end page home -->
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE: ABOUT
+═══════════════════════════════════════════════ -->
+<div class="page" id="page-about">
+  <section class="about-hero">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <div class="label-tag">Our Mission</div>
+          <h2 class="section-h2 green">Quantum-Safe Governance Built from Deep-Tech and Finance Reality</h2>
+          <div class="section-divider divider-green"></div>
+          <p class="about-para">Quantiqo was born from a critical, observed failure: as UK organisations deploy autonomous AI agents at machine speed, their legacy financial and governance systems are failing to track, verify, and secure these high-velocity interactions  creating an Accounting Gap and mounting cryptographic debt.</p>
+          <p class="about-para">Our platform transforms hybrid workforce management from a fragmented, vulnerable process into a scalable, automated, and quantum-safe standard. We don't just encrypt data  we model the relationship between every AI agent action and its PQC-signed financial settlement, creating a single verifiable audit trail that accelerates compliance and unlocks the true ROI of agentic labour.</p>
+          <p class="about-para">Founded by an MSc Finance &amp; Investment Banking specialist and an MSc Project Management engineer with direct expertise in high-stakes audit integrity, RAID governance, and technical recruitment  Quantiqo is domain expertise encoded into post-quantum infrastructure, built specifically for the UK's NCSC 2035 transition.</p>
+          <div class="about-tags">
+            <div class="feature-tag">PQC-ID Agentic Identity Layer</div>
+            <div class="feature-tag">Lattice Micro-Settlement Engine</div>
+            <div class="feature-tag">Autonomous RAID-Q Intelligence</div>
+            <div class="feature-tag">Quantum Posture Diagnostic</div>
+            <div class="feature-tag">Edge-First PQC Audit Rail</div>
+            <div class="feature-tag">Crypto-Agile Architecture</div>
+            <div class="feature-tag">NCSC 2035 · FCA PS21/3 Aligned</div>
+            <div class="feature-tag">Patent-Pending Lattice IP</div>
+          </div>
+        </div>
+        <div>
+          <div class="founder-card">
+            <div class="founder-tag">Founder &amp; CEO</div>
+            <h4>Shahzaib Sajjad</h4>
+            <div class="founder-title">MSc Finance &amp; Investment Banking · Platform Lead</div>
+            <p>MSc Finance &amp; Investment Banking graduate from the University of Hertfordshire with ACCA part-qualification. Brings deep expertise in financial statement analysis, high-stakes investment modelling, and bank reconciliation. Leads the platform's financial settlement logic, audit integrity architecture, and institutional compliance layers.</p>
+            <p>Shahzaib's background in accounting software, financial modelling, and regulatory alignment with the NCSC 2035 roadmap and FCA security frameworks forms the analytical backbone of Quantiqo's micro-settlement and crypto-debt scoring engines.</p>
+            <button class="btn-primary" onclick="showPage('contact')">Contact Founder →</button>
+          </div>
+
+          <div class="founder-card">
+            <div class="founder-tag">Co-Founder &amp; CTO</div>
+            <h4>Faseeh A. Sarwarhas</h4>
+            <div class="founder-title">MSc Project Management &amp; Mechatronics Engineering · Tech Lead</div>
+            <p>Project Management specialist with a background in Mechatronics Engineering and an MSc from the University of Hertfordshire. With practical experience managing large-scale technical recruitment projects for high-security clients, Faseeh leads the platform's engineering logic, RAID-Q architecture, and Edge-PQC deployment.</p>
+            <p>His expertise in RAID logs, Atlassian Agile frameworks, and systems engineering ensures the platform's operational robustness. Architected the autonomous RAID-Q intelligence engine and the PQC-ID identity mapping layer that powers agentic accountability at machine speed.</p>
+            <button class="btn-blue" onclick="showPage('market')">View Market Opportunity →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- end page about -->
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE: PLATFORM
+═══════════════════════════════════════════════ -->
+<div class="page" id="page-platform">
+  <section class="section-dark" style="padding-top:clamp(80px,12vw,120px);">
+    <div class="container">
+      <div class="label-tag">The Platform</div>
+      <h2 class="section-h2 white">Every Layer of Quantiqo's Agentic Settlement Intelligence</h2>
+      <div class="section-divider divider-green"></div>
+      <p class="para-dark platform-sub">Quantiqo is a cloud-native institutional SaaS platform built on a modular architecture  React-based quantum posture dashboards, FastAPI settlement workflow backend, NIST-standard PQC data model, and NCSC-compliant UK cloud infrastructure  designed to serve financial institutions, defence contractors, and technical enterprises without requiring cryptographic expertise on-site.</p>
+
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-num">&lt;200ms</div>
+          <div class="kpi-lbl">PQC settlement latency</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">99.9%</div>
+          <div class="kpi-lbl">Reconciliation accuracy</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">£15K</div>
+          <div class="kpi-lbl">Annual ARPC · institutional</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">5+</div>
+          <div class="kpi-lbl">Patentable IP modules</div>
+        </div>
+      </div>
+
+      <div class="platform-grid">
+        <div class="platform-card">
+          <div class="platform-card-img">
+            <img src="q8.jpg" alt="PQC-ID Onboarding Module" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+          </div>
+          <div class="inner">
+            <div class="element-badge">Module 01</div>
+            <h3>PQC-ID &amp; Onboarding Engine</h3>
+            <p>Onboard AI agents and human contributors via ML-DSA identity assignment with completeness checks. Each PQC-ID binds model version, intent, and timestamp  establishing the provenance spine before workflow progresses.</p>
+            <div class="more-text">Metadata capture with automated agent-type classification. Structured import templates eliminate manual onboarding errors. The identity layer converts raw agentic actions into structured, cryptographically-signed billable artefacts  the foundational layer of the quantum-safe settlement architecture.</div>
+            <button class="expand-btn" onclick="toggleCard(this)">Expand ↓</button>
+          </div>
+        </div>
+        <div class="platform-card">
+          <div class="platform-card-img">
+            <img src="q9.jpg" alt="Micro-Settlement Engine" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+          </div>
+          <div class="inner">
+            <div class="element-badge">Module 02</div>
+            <h3>Lattice Micro-Settlement Engine</h3>
+            <p>Output-based settlement using ML-DSA smart contracts  payments trigger only upon verified proof-of-task. Replaces subscription software costs with performance-linked financial reconciliation in real time.</p>
+            <div class="more-text">Classification drives what evidence is collected, how settlement progresses, and what format the financial output takes  eliminating manual judgement and creating consistency across agents, staff, and clients. Direct Kafka stream integration ensures 100k+ settlements per hour at 99.99% uptime.</div>
+            <button class="expand-btn" onclick="toggleCard(this)">Expand ↓</button>
+          </div>
+        </div>
+        <div class="platform-card">
+          <div class="platform-card-img">
+            <img src="q10.jpg" alt="RAID-Q Governance Layer" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+          </div>
+          <div class="inner">
+            <div class="element-badge">Module 03</div>
+            <h3>Autonomous RAID-Q Intelligence</h3>
+            <p>Machine-readable governance model capturing Risks, Assumptions, Issues, and Dependencies in real time. PQC-encrypts every log entry at machine speed  ensuring project state and reported state never diverge.</p>
+            <div class="more-text">Version history with lattice-based file hashing for log integrity verification. Immutable audit trail of all agent actions and settlement events. The RAID-Q spine is Quantiqo's core innovation  a governance architecture with no direct equivalent in existing UK fintech or defence software categories.</div>
+            <button class="expand-btn" onclick="toggleCard(this)">Expand ↓</button>
+          </div>
+        </div>
+        <div class="platform-card">
+          <div class="platform-card-img">
+            <img src="q11.jpg" alt="Quantum Posture Diagnostic" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+          </div>
+          <div class="inner">
+            <div class="element-badge">Module 04</div>
+            <h3>Quantum Posture Diagnostic</h3>
+            <p>Proprietary scanning engine generating a Quantum Posture Score for every hybrid team and supply chain. Identifies Cryptographic Debt in RSA/ECC systems and maps NCSC 2035 Phase 1 and 2 migration pathways.</p>
+            <div class="more-text">Chronological HNDL risk assessment is automatic, with real-time override capability for high-stakes M&amp;A environments. Each posture entry is linked to its cryptographic evidence source  making the diagnostic fully traceable for PE firms, accountants, and commercial negotiators.</div>
+            <button class="expand-btn" onclick="toggleCard(this)">Expand ↓</button>
+          </div>
+        </div>
+        <div class="platform-card">
+          <div class="platform-card-img">
+            <img src="q12.jpg" alt="Edge-First PQC Audit Rail" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+          </div>
+          <div class="inner">
+            <div class="element-badge">Module 05</div>
+            <h3>Edge-First PQC Audit Rail</h3>
+            <p>Designed for defence and banking dark labs  signs and audits sensitive project metadata locally via HSM modules before syncing to cloud. Full data sovereignty without public cloud exposure of mission-critical intelligence.</p>
+            <div class="more-text">Legal-safe PQC templates enforce factual audit documentation over interpretation  allowing finance and operations teams to generate institutional-grade settlement records without inadvertently exposing classified project data. Outputs are negotiation-ready and NCSC-compliant, not generic cybersecurity reports.</div>
+            <button class="expand-btn" onclick="toggleCard(this)">Expand ↓</button>
+          </div>
+        </div>
+        <div class="platform-card">
+          <div class="platform-card-img">
+            <img src="q13.jpg" alt="Crypto-Agile Compliance Engine" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+          </div>
+          <div class="inner">
+            <div class="element-badge">Module 06</div>
+            <h3>Crypto-Agile Compliance Engine</h3>
+            <p>Programmatically synchronises with NCSC, PRA, and Bank of England mandates. As PQC standards evolve, the platform auto-updates cryptographic primitives without breaking live financial workflows or settlement rails.</p>
+            <div class="more-text">Over time, the compliance engine creates a feedback loop where resolved HNDL vulnerabilities actively reduce the cryptographic attack surface. The only UK platform that transforms quantum threat intelligence into enforceable operational improvement controls  making PQC migration a continuous process, not a reactive emergency.</div>
+            <button class="expand-btn" onclick="toggleCard(this)">Expand ↓</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- end page platform -->
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE: MARKET
+═══════════════════════════════════════════════ -->
+<div class="page" id="page-market">
+  <section class="section-dark" style="padding-top:clamp(80px,12vw,120px);">
+    <div class="container">
+      <div class="label-tag">Market Analysis</div>
+      <h2 class="section-h2 white">A £294M UK Problem. A 2035 Mandatory Deadline. Zero Direct Competition.</h2>
+      <div class="section-divider divider-green"></div>
+      <p class="para-dark" style="max-width:700px;margin-bottom:40px;">The UK presents a structurally mandated market opportunity for Quantiqo. With 79% of UK firms deploying AI agents without a settlement rail, the NCSC 2035 quantum migration deadline creating legislative urgency, and a £294M annual addressable market across fintech, defence, and private equity  the demand for quantum-safe agentic governance tooling is both urgent and completely unserved by any existing UK software category.</p>
+
+      <div class="market-kpi">
+        <div class="mkt-card">
+          <div class="mkt-num">£294M</div>
+          <div class="mkt-lbl">UK annual addressable market across fintech, defence, mid-market tech, and PE sectors  driven by NCSC mandatory migration timelines</div>
+          <div class="mkt-source">Quantiqo TAM Analysis 2026</div>
+        </div>
+        <div class="mkt-card">
+          <div class="mkt-num">£1.8B</div>
+          <div class="mkt-lbl">Global post-quantum cryptography market by 2030, growing at 35% CAGR  driven by NIST standardisation and state-level HNDL threats</div>
+          <div class="mkt-source">Global PQC Market Report 2024</div>
+        </div>
+        <div class="mkt-card">
+          <div class="mkt-num">$60B</div>
+          <div class="mkt-lbl">Global agentic AI economy by 2030  creating massive demand for auditable, PQC-signed labour settlement infrastructure worldwide</div>
+          <div class="mkt-source">Agentic Economy Forecast 2024</div>
+        </div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-title">UK PQC Migration Urgency by Sector</div>
+          <div class="chart-sub">NCSC Phase 1 readiness gap across critical industries</div>
+          <div class="chart-wrap"><canvas id="chartSector"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Agentic AI Adoption Gaps</div>
+          <div class="chart-sub">UK enterprise AI deployment without settlement rails</div>
+          <div class="chart-wrap"><canvas id="chartRootCause"></canvas></div>
+        </div>
+      </div>
+
+      <div class="chart-card-full">
+        <div class="chart-title">Competitive Positioning  UK Quantum-Safe Settlement Landscape</div>
+        <div class="chart-sub">Quantiqo vs. existing platform categories across key PQC capability dimensions</div>
+        <div class="chart-wrap-lg"><canvas id="chartRadar"></canvas></div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-title">Global PQC &amp; Agentic Economy Growth</div>
+          <div class="chart-sub">Market expansion trajectory (USD Billion)</div>
+          <div class="chart-wrap"><canvas id="chartGrowth"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Quantiqo vs Competitors  Capability Score</div>
+          <div class="chart-sub">Feature coverage comparison across agentic settlement dimensions</div>
+          <div class="chart-wrap"><canvas id="chartPerf"></canvas></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- end page market -->
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE: PRICING
+═══════════════════════════════════════════════ -->
+<div class="page" id="page-pricing">
+  <section style="background:var(--bg-black);padding:clamp(80px,12vw,120px) 0 clamp(60px,8vw,100px);">
+    <div class="container">
+      <div class="label-tag">Pricing Plans</div>
+      <h2 class="section-h2 green">Institutional-Grade PQC Settlement at Enterprise-Friendly Pricing</h2>
+      <div class="section-divider divider-green"></div>
+      <p class="para-dark" style="max-width:640px;margin-bottom:48px;">Three subscription tiers designed to grow with your agentic workforce complexity and team size. All plans include the full Quantiqo PQC settlement rail, RAID-Q governance engine, and quantum posture scoring. No cryptographic expertise required. No expensive PQC consultancy needed.</p>
+
+      <div class="pricing-grid">
+        <div class="price-card">
+          <div class="price-tier">Basic Tier</div>
+          <h3>SME / Recruitment</h3>
+          <p class="desc">For SMEs and recruitment firms onboarding AI agents and needing a structured quantum-safe settlement alternative to opaque software subscriptions.</p>
+          <span class="price-amount">£499</span>
+          <div class="price-period">/ MONTH · BILLED MONTHLY</div>
+          <div class="price-divider"></div>
+          <ul class="price-features">
+            <li><span class="chk">✓</span> PQC-ID onboarding for up to 50 agents</li>
+            <li><span class="chk">✓</span> Real-time micro-settlement dashboard</li>
+            <li><span class="chk">✓</span> Basic RAID-Q governance logging</li>
+            <li><span class="chk">✓</span> Quantum Posture Score (basic)</li>
+            <li><span class="chk">✓</span> NCSC 2035 Phase 1 alignment report</li>
+            <li><span class="chk">✓</span> Manual review workflow</li>
+            <li><span class="chk">✓</span> 3 platform users</li>
+          </ul>
+          <button class="price-btn price-btn-outline" onclick="showPage('contact')">Get Started</button>
+        </div>
+
+        <div class="price-card featured">
+          <div class="price-tier">Professional Tier</div>
+          <h3>Fintech / Mid-Market</h3>
+          <p class="desc">For fintechs and mid-market firms requiring advanced API access, full RAID-Q intelligence, and NCSC-aligned compliance reporting for hybrid workforces.</p>
+          <span class="price-amount">£1,499</span>
+          <div class="price-period">/ MONTH · BILLED MONTHLY</div>
+          <div class="price-divider"></div>
+          <ul class="price-features">
+            <li><span class="chk">✓</span> Advanced PQC-ID API access</li>
+            <li><span class="chk">✓</span> Full RAID-Q autonomous logging</li>
+            <li><span class="chk">✓</span> Jira / MS Project integration</li>
+            <li><span class="chk">✓</span> Cloud-based quantum posture analytics</li>
+            <li><span class="chk">✓</span> NCSC-aligned compliance reporting</li>
+            <li><span class="chk">✓</span> Crypto-Agility updates included</li>
+            <li><span class="chk">✓</span> 10 platform users</li>
+          </ul>
+          <button class="price-btn price-btn-green" onclick="showPage('contact')">Start Free Pilot</button>
+        </div>
+
+        <div class="price-card">
+          <div class="price-tier">Enterprise Tier</div>
+          <h3>Banking / Defence</h3>
+          <p class="desc">For Tier-1 banks, MoD prime contractors, and PE firms requiring full ERP integration, Edge-PQC proxies, and white-label quantum audit reports.</p>
+          <span class="price-amount">£4,000</span>
+          <div class="price-period">/ MONTH · CUSTOM PRICING</div>
+          <div class="price-divider"></div>
+          <ul class="price-features">
+            <li><span class="chk">✓</span> Full ERP integration (SAP / Oracle)</li>
+            <li><span class="chk">✓</span> On-premise Edge-PQC proxy (HSM)</li>
+            <li><span class="chk">✓</span> White-label quantum audit reports</li>
+            <li><span class="chk">✓</span> M&amp;A Quantum Due Diligence layer</li>
+            <li><span class="chk">✓</span> 24/7 dedicated security support</li>
+            <li><span class="chk">✓</span> NCSC Phase 2 &amp; 3 migration support</li>
+            <li><span class="chk">✓</span> Unlimited users + SSO</li>
+          </ul>
+          <button class="price-btn price-btn-outline" onclick="showPage('contact')">Contact Sales</button>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div class="label-tag">FAQ</div>
+      <h3 style="font-family:var(--display);color:var(--cyan);font-size:clamp(22px,3vw,30px);font-weight:800;margin-bottom:28px;letter-spacing:-0.3px;">Common Questions</h3>
+      <div class="faq-wrap">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFAQ(this)">
+            <h4>Do I need cryptographic expertise to use Quantiqo?</h4>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-body">No. Quantiqo is specifically designed for finance managers, operations leads, and project managers without quantum cryptography training. The workflow-guided interface with PQC-ID assignment, automated RAID-Q logging, and compliance templates means you can build a professional-grade quantum-safe settlement rail without cryptographic expertise. Our design principle: a finance team member should be able to manage a complex hybrid workforce settlement without external PQC consultancy at the pre-escalation stage.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFAQ(this)">
+            <h4>How is Quantiqo different from Post-Quantum (UK), Arqit, or SAP?</h4>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-body">Post-Quantum focuses on VPN and communication security. Arqit focuses on symmetric key agreement for networks. SAP handles human-centric payroll  it cannot reconcile AI agentic output or score cryptographic debt. Quantiqo operates in an entirely different category: we assign billable PQC identities to AI agents, trigger micro-settlements upon verified task completion, and generate autonomous RAID-Q governance logs  all wrapped in NIST-standard lattice cryptography. We are the operating system for the agentic economy that sits between ERP software and national quantum compliance.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFAQ(this)">
+            <h4>What is the HNDL threat and how does Quantiqo defend against it?</h4>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-body">Harvest Now, Decrypt Later (HNDL) is a state-level attack where encrypted financial and project data is intercepted today and stored until cryptographically relevant quantum computers (CRQCs) can decrypt it  potentially in 5–10 years. For the UK's £11 trillion financial sector, today's pension records, defence contracts, and investment strategies are already a ticking liability. Quantiqo wraps every settlement record and RAID-Q log in NIST ML-DSA lattice signatures, ensuring that even future quantum computers cannot decrypt the data. This is not theoretical  NCSC has issued formal guidance on HNDL risks in 2025.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFAQ(this)">
+            <h4>How does the Crypto-Agility Engine reduce future compliance risk?</h4>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-body">As NIST and NCSC update PQC standards over the 2025–2035 migration window, some algorithms may be deprecated or superseded. Quantiqo's Crypto-Agile architecture allows the platform to swap cryptographic primitives  replacing one lattice algorithm with another  without breaking live financial workflows, disrupting settlement rails, or requiring client-side re-deployment. This means your institution never faces emergency algorithm migration under regulatory pressure. The compliance engine monitors NCSC, PRA, and Bank of England directives in real time and updates operational boundaries automatically.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFAQ(this)">
+            <h4>Can I trial Quantiqo before committing to a subscription?</h4>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-body">Yes  Quantiqo is currently recruiting 5–8 UK institutional pilot partners for a structured 12-week validation programme at discounted or pilot-access pricing. Participants receive full platform access, founder-led onboarding support, and direct input into the product roadmap. We are targeting fintech firms, technical recruitment agencies, and organisations in NCSC Phase 1 migration who are actively seeking an agentic settlement and quantum posture scoring solution. Contact us to apply for a pilot partnership position.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- end page pricing -->
+
+<!-- ═══════════════════════════════════════════
+     PAGE: CONTACT
+═══════════════════════════════════════════════ -->
+<div class="page" id="page-contact">
+  <section style="background:var(--bg-black);padding:clamp(80px,12vw,120px) 0 clamp(60px,8vw,100px);">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- LEFT CONTENT -->
+        <div>
+          <div class="label-tag">Get In Touch</div>
+          <h2 class="section-h2 green">Join the Quantiqo Pilot Programme</h2>
+          <div class="section-divider divider-green"></div>
+
+          <p class="contact-left-para">
+            Quantiqo is currently recruiting 5–8 UK institutional pilot partners for a structured 12-week validation programme. 
+            We are targeting finance managers, operations directors, and CISOs at organisations with hybrid human-AI workforces 
+            planning NCSC 2035 migration.
+          </p>
+
+          <p class="contact-left-para" style="margin-bottom:28px;">
+            Book a live walkthrough and see how Quantiqo transforms AI workforce management into a PQC-signed settlement rail.
+          </p>
+
+          <div class="contact-item">
+            <div class="contact-icon">🌐</div>
+            <div class="contact-item-text"><strong>Website</strong><span>quantiqo.co.uk</span></div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div class="contact-item-text"><strong>Location</strong><span>London, United Kingdom</span></div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">🛡️</div>
+            <div class="contact-item-text"><strong>Infrastructure</strong><span>Azure UK · AWS UK · Sovereign Hosting</span></div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">🔐</div>
+            <div class="contact-item-text"><strong>IP</strong><span>Patent-Pending Lattice · RAID-Q · PQC-ID</span></div>
+          </div>
+        </div>
+
+        <!-- FORM (WEB3FORMS CONNECTED) -->
+        <form class="contact-form-card"
+              action="https://api.web3forms.com/submit"
+              method="POST">
+
+          <!-- ✅ YOUR ACCESS KEY -->
+          <input type="hidden" name="access_key" value="ef88709f-dd2f-4607-acfe-2d17b44063bc">
+
+          <!-- OPTIONAL META -->
+          <input type="hidden" name="subject" value="New Quantiqo Demo Request">
+          <input type="hidden" name="from_name" value="Quantiqo Website">
+
+          <h3>Book a Demo</h3>
+
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" name="name" class="form-ctrl" placeholder="Your name" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Organisation Name</label>
+            <input type="text" name="business" class="form-ctrl" placeholder="Your organisation" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" name="email" class="form-ctrl" placeholder="your@organisation.co.uk" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Sector</label>
+            <select name="sector" class="form-ctrl" required>
+              <option value="">Select your sector</option>
+              <option>Fintech / Neo-Banking</option>
+              <option>Investment Banking / Private Equity</option>
+              <option>Defence / Government Contracting</option>
+              <option>Technical Recruitment / MSP</option>
+              <option>Audit & Advisory</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">AI Agent Scale</label>
+            <select name="volume" class="form-ctrl" required>
+              <option value="">Select scale</option>
+              <option>Planning Stage</option>
+              <option>1–50 Agents</option>
+              <option>50–500 Agents</option>
+              <option>500+ Agents</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Primary PQC Challenge</label>
+            <textarea name="message" class="form-ctrl ta" required
+              placeholder="Tell us your challenge…"></textarea>
+          </div>
+
+          <button class="form-submit" type="submit">
+            Submit Demo Request →
+          </button>
+
+        </form>
+
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="footer-logo">Quantiqo</span>
+        <p>The UK's first Post-Quantum Settlement &amp; Agentic Governance platform  transforming fragmented agentic labour into PQC-signed, billable settlements using a proprietary Lattice Micro-Settlement Engine, Autonomous RAID-Q Intelligence, PQC-ID Identity Layer, and Quantum Posture Diagnostic to help UK institutions govern hybrid workforces, meet NCSC 2035 mandates, and prevent HNDL attacks before they materialise.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Platform</h5>
+        <a onclick="showPage('platform')">PQC-ID Identity Engine</a>
+        <a onclick="showPage('platform')">Micro-Settlement Rail</a>
+        <a onclick="showPage('platform')">RAID-Q Intelligence</a>
+        <a onclick="showPage('platform')">Crypto-Agile Compliance</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a onclick="showPage('about')">About Quantiqo</a>
+        <a onclick="showPage('market')">Market Analysis</a>
+        <a onclick="showPage('pricing')">Pricing &amp; Plans</a>
+        <a onclick="showPage('contact')">Book a Demo</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 <span>Quantiqo</span> · London, UK · NCSC 2035 Aligned · FCA PS21/3 Compliant · UK GDPR · Patent-Pending Lattice IP</p>
+      <p><span>quantiqo.co.uk</span> · Innovator Founder Visa Application · Strictly Confidential</p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ═══════════ JAVASCRIPT ═══════════ -->
+<script>
+/* ─── PAGE NAV ───────────────────────────────── */
+function showPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-links button').forEach(b=>b.classList.remove('active'));
+  const pg=document.getElementById('page-'+name);
+  if(pg){pg.classList.add('active');}
+  const btn=document.getElementById('nav-'+name);
+  if(btn){btn.classList.add('active');}
+  window.scrollTo({top:0,behavior:'instant'});
+  if(name==='market'&&!window.marketChartsLoaded){initMarketCharts();window.marketChartsLoaded=true;}
+}
+
+function toggleCard(btn){
+  const card=btn.closest('.platform-card');
+  const isOpen=card.classList.contains('open');
+  document.querySelectorAll('.platform-card').forEach(c=>{
+    c.classList.remove('open');
+    const eb=c.querySelector('.expand-btn');
+    if(eb){eb.textContent=eb.textContent.includes('Expand')?'Expand ↓':'Learn More ↓';}
+  });
+  if(!isOpen){
+    card.classList.add('open');
+    btn.textContent=btn.textContent.includes('Expand')?'Collapse ↑':'Show Less ↑';
+  }
+}
+
+function toggleFAQ(el){
+  el.parentElement.classList.toggle('open');
+}
+
+function closeMobile(){
+  document.getElementById('mobileNav').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+}
+
+document.getElementById('hamburger').addEventListener('click',function(){
+  this.classList.toggle('open');
+  document.getElementById('mobileNav').classList.toggle('open');
+});
+
+function handleSubmit(e){
+  e.preventDefault();
+  document.getElementById('formSuccess').style.display='block';
+}
+
+/* ─── CHART THEME ────────────────────────────── */
+const CYAN='rgba(0,212,255,1)';
+const CYAN2='rgba(0,212,255,0.75)';
+const CYAN3='rgba(0,212,255,0.4)';
+const BLUE='rgba(21,53,160,0.9)';
+const BLUE2='rgba(75,126,232,0.7)';
+const GRID='rgba(255,255,255,0.05)';
+const MUTED='rgba(122,176,204,0.75)';
+
+Chart.defaults.font.family="'IBM Plex Mono', monospace";
+Chart.defaults.font.size=11;
+Chart.defaults.color=MUTED;
+
+/* ─── MARKET CHARTS ──────────────────────────── */
+function initMarketCharts(){
+  // PQC Migration Urgency by Sector
+  new Chart(document.getElementById('chartSector').getContext('2d'),{
+    type:'bar',
+    data:{
+      labels:['Defence / MoD','Investment Banking','Fintech / Neo-Banks','Healthcare','Professional Svcs','Technical Recruitment'],
+      datasets:[{
+        label:'% without quantum-safe infrastructure',
+        data:[88,84,79,72,68,61],
+        backgroundColor:[CYAN,CYAN2,CYAN3,'rgba(0,212,255,0.22)',BLUE2,'rgba(21,53,160,0.45)'],
+        borderRadius:5,barPercentage:0.6
+      }]
+    },
+    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{grid:{color:GRID},ticks:{color:MUTED,callback:v=>v+'%'}},y:{grid:{display:false},ticks:{color:MUTED,font:{size:10}}}}}
+  });
+
+  // Agentic AI Adoption Gaps
+  new Chart(document.getElementById('chartRootCause').getContext('2d'),{
+    type:'doughnut',
+    data:{
+      labels:['No Settlement Rail (79%)','No RAID-Q Logging (68%)','Legacy RSA/ECC (91%)','No PQC-ID Assigned (85%)','No Posture Score (73%)'],
+      datasets:[{
+        data:[79,68,91,85,73],
+        backgroundColor:[CYAN,'rgba(0,212,255,0.68)',CYAN3,BLUE2,'rgba(21,53,160,0.5)'],
+        borderColor:['rgba(0,212,255,0.9)','rgba(0,212,255,0.68)','rgba(0,212,255,0.42)',BLUE2,'rgba(21,53,160,0.55)'],
+        borderWidth:1.5
+      }]
+    },
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:MUTED,boxWidth:10,padding:10,font:{size:10}}}}}
+  });
+
+  // Radar Competitive
+  new Chart(document.getElementById('chartRadar').getContext('2d'),{
+    type:'radar',
+    data:{
+      labels:['Agentic Identity (PQC-ID)','Micro-Settlement','RAID-Q Logging','Quantum Posture Score','Edge-First Audit','Crypto-Agility'],
+      datasets:[
+        {label:'Quantiqo',data:[5,5,5,5,5,5],backgroundColor:'rgba(0,212,255,0.1)',borderColor:CYAN,borderWidth:2,pointBackgroundColor:CYAN},
+        {label:'Post-Quantum (UK)',data:[2,1,1,1,1,3],backgroundColor:'rgba(21,53,160,0.07)',borderColor:BLUE2,borderWidth:1.5,pointBackgroundColor:BLUE2},
+        {label:'Arqit (UK)',data:[1,1,1,1,2,2],backgroundColor:'rgba(100,180,255,0.05)',borderColor:'rgba(100,180,255,0.5)',borderWidth:1.5,pointBackgroundColor:'rgba(100,180,255,0.5)'},
+        {label:'Legacy ERPs (SAP/Oracle)',data:[1,1,1,1,1,1],backgroundColor:'rgba(150,150,180,0.05)',borderColor:'rgba(150,150,180,0.4)',borderWidth:1.5,pointBackgroundColor:'rgba(150,150,180,0.4)'},
+      ]
+    },
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:MUTED,boxWidth:10,padding:14,font:{size:10}}}},scales:{r:{backgroundColor:'rgba(0,212,255,0.01)',grid:{color:GRID},pointLabels:{color:MUTED,font:{size:10}},ticks:{display:false},min:0,max:5}}}
+  });
+
+  // PQC Market Growth
+  new Chart(document.getElementById('chartGrowth').getContext('2d'),{
+    type:'bar',
+    data:{
+      labels:['2022','2023','2024','2025','2026','2027','2028','2030'],
+      datasets:[
+        {label:'Global PQC Market (USD B)',data:[0.12,0.18,0.22,0.36,0.52,0.78,1.1,1.8],backgroundColor:'rgba(21,53,160,0.65)',borderRadius:5,barPercentage:0.55},
+        {type:'line',label:'Agentic AI Economy (USD B)',data:[null,5,9,14,20,30,42,60],borderColor:CYAN,borderWidth:2,yAxisID:'y2',tension:0.4,pointBackgroundColor:CYAN,fill:false}
+      ]
+    },
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:MUTED,boxWidth:10,padding:12,font:{size:10}}}},scales:{x:{grid:{color:GRID},ticks:{color:MUTED}},y:{grid:{color:GRID},ticks:{color:MUTED,callback:v=>'$'+v+'B'}},y2:{position:'right',grid:{display:false},ticks:{color:MUTED,callback:v=>'$'+v+'B'}}}}
+  });
+
+  // Performance Comparison
+  new Chart(document.getElementById('chartPerf').getContext('2d'),{
+    type:'bar',
+    data:{
+      labels:['PQC Identity','Micro-Settlement','RAID-Q Logs','Posture Score','Edge Audit','Crypto-Agility'],
+      datasets:[
+        {label:'Quantiqo',data:[98,98,96,94,92,96],backgroundColor:CYAN2,borderRadius:5,barPercentage:0.35},
+        {label:'Existing UK Platforms Avg',data:[8,5,5,2,10,12],backgroundColor:BLUE2,borderRadius:5,barPercentage:0.35}
+      ]
+    },
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:MUTED,boxWidth:10,padding:14,font:{size:10}}}},scales:{x:{grid:{color:GRID},ticks:{color:MUTED,font:{size:9}}},y:{grid:{color:GRID},ticks:{color:MUTED,callback:v=>v+' pts'}}}}
+  });
+}
+</script>
+</body>
+</html>
